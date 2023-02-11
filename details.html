@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<title>Carbon Footprint Details</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
+    body{
+        margin:0px;
+        padding: 0px;
+        outline : none;
+        border : none;
+        background-color : #292F36;
+        font-family : 'Roboto';
+        scrollbar-width: none;
+    }   
+
+    #hero{
+        padding:10px 50px;
+        width:100%;
+        height: 100vh;
+        box-sizing : border-box;
+    }
+
+    #hero .header{
+        height : 120px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color:#fff;
+    }
+
+    #hero .header span{
+        background: #FF6B6B;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color : #fff;
+    }
+
+    #hero .content_body{
+        display:flex;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .content_body .left{
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .left .content{
+        height: 480px;
+        width: 100%;
+        overflow:scroll;
+    }
+
+    .left .date{
+        background-color: #FF6B6B;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: white;
+        width:90px;
+        margin:0px;
+        margin-bottom:15px;
+    }
+
+    .left .visit_detail{
+        height: 94px;
+        width: 100%;
+        background: #EAE2B7;
+        border-radius: 10px;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        padding: 10px 20px;
+        margin-bottom:15px;
+        padding-right:0px;
+        box-sizing:border-box;
+    }
+
+    .left .visit_detail .site_name{
+        font-size : 28px;
+        margin-bottom : 10px;
+    }
+
+    .left .visit_detail .site_details{
+        display :flex;
+        justify-content: start;
+        align-items:center;
+        width:100%;
+        margin-bottom: 10px;
+    }
+
+
+    .left .visit_detail .site_details .sm_dt{
+        padding: 3px 10px;
+        border-radius: 10px;
+        margin-right: 10px;    
+    }
+    .carbon_gram{
+        background-color: #FCBF49;
+    }
+    .carbon_percent{
+        background-color: #FFFC99;
+    }
+    .green_status{
+        background-color: #93C0A4
+    }
+    
+    .right{
+        padding-left:20px;
+        box-sizing:border-box;
+        width: 50%;
+        height: 420px;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right p{
+        align-self : center;
+        margin: 0px;
+        margin-top: 20px;
+        background: #FFF275;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+</style>
+</head>
+<body>
+    <section id = "hero">
+        <div class="header">
+            <p class = "header-text">Total Carbon Emitted : <span>30g</span></p>
+        </div>
+        <div class="content_body">
+            <div class="left">
+                <!-- .date -->
+                <div class="content">
+                    <p class = "date">12/02/2023</p>
+                    <div class="visit_detail">
+                        <div class="site_name">www.blogger.com</div>
+                        <div class="site_details">
+                            <div class="carbon_gram sm_dt">Grams of carbon : 0.5g</div>
+                            <div class="carbon_percent sm_dt">Percent of carbon : 20%</div>
+                            <div class="green_status sm_dt">Green status : green</div>
+                        </div>
+                    </div>
+                    <div class="visit_detail">
+                        <div class="site_name">www.blogger.com</div>
+                        <div class="site_details">
+                            <div class="carbon_gram sm_dt">Grams of carbon : 0.5g</div>
+                            <div class="carbon_percent sm_dt">Percent of carbon : 20%</div>
+                            <div class="green_status sm_dt">Green status : green</div>
+                        </div>
+                    </div>
+                    <div class="visit_detail">
+                        <div class="site_name">www.blogger.com</div>
+                        <div class="site_details">
+                            <div class="carbon_gram sm_dt">Grams of carbon : 0.5g</div>
+                            <div class="carbon_percent sm_dt">Percent of carbon : 20%</div>
+                            <div class="green_status sm_dt">Green status : green</div>
+                        </div>
+                    </div>
+                    <div class="visit_detail">
+                        <div class="site_name">www.blogger.com</div>
+                        <div class="site_details">
+                            <div class="carbon_gram sm_dt">Grams of carbon : 0.5g</div>
+                            <div class="carbon_percent sm_dt">Percent of carbon : 20%</div>
+                            <div class="green_status sm_dt">Green status : green</div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="right">
+                <canvas id = "myChart"></canvas>
+                <p>Carbon emission monthly wise</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src = "assets/js/firebase/firebase-app.js"></script>
+    <script src = "assets/js/firebase/firebase-database.js"></script>
+    <script src = "assets/js/firebase/firebase-auth.js"></script>
+    <script src = "assets/js/firebase/firebase-firestore.js"></script>
+    <script src = "assets/js/firebase_handler/firebase_config.js"></script>
+    
+    <script src = "assets/js/firebase_handler/firebase_handle.js"></script>
+</body>
+</html>

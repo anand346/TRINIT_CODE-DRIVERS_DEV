@@ -11,14 +11,19 @@ chrome.tabs.query({active : true , currentWindow : true },async (tabs) => {
     let status_span = document.getElementsByClassName("status_span")[0];
 
 
+    
+    //extracting the url from current open tab
+    let url = tabs[0].url;
+    let domain = new URL(url);
+    domain = domain.hostname.replaceAll('.','(dot)') ;
+
+
     // making the spinner visible and DOM hidden until the data is not loaded
     main_container.style.display = "none";
     spinner.style.display = "block";
 
     // let url = "https://leetcode.com" ;
 
-    //extracting the url from current open tab
-    let url = tabs[0].url;
 
     // request options for reverse proxy
     const options = {
@@ -36,7 +41,7 @@ chrome.tabs.query({active : true , currentWindow : true },async (tabs) => {
 
     //sending the request on website carbon with the help of reverse proxy (because of CORS policy)
     let response = await fetch("https://http-cors-proxy.p.rapidapi.com/",options);
-    let result = await response.json();
+    let result = await response.json();                                                                                                                                                                                                                                                                                
 
 
     // making the spinner hidden and DOM visible when data is loaded
@@ -85,7 +90,53 @@ chrome.tabs.query({active : true , currentWindow : true },async (tabs) => {
 
 
     //calling the animation function
-    makeAnimation(percent_span,0,carbonPercent,5000);
+    makeAnimation(percent_span,0,carbonPercent,3000);
+
+
+    //declaring firebase variables
+    var database = firebase.database();
+    var usersCollection = database.ref('/users');
+    var userID ;
+
+    //checking if there's an user exists already
+
+    chrome.storage.local.get("userID", async function(items){
+
+
+        if(Array.isArray(items.userID)){
+            userID = items.userID[0]
+        }else{
+            userID = usersCollection.push().key;        
+            chrome.storage.local.set({ "userID": [userID] }, function(){
+                //  Data's been saved boys and girls, go on home
+            });
+        }
+
+
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let currentDate = `${day}-${month}-${year}`;
+
+
+        
+
+        //sending data to user id
+        await usersCollection.child(userID).child(currentDate).child("visits").child(domain).set({
+
+            "carbon_gram" : [carbonGrams],
+            "carbon_precent" : [carbonPercent],
+            "green_status" : [greenStatus]
+
+        });
+    });
+    
+    //generating today's date
+    
+
+
+
 // }
 
 // getData();
